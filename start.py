@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from settings import Settings
+from ship import Ship
 
 def run_game():
     # Инициализирует игру и создает объект экрана
@@ -10,6 +11,9 @@ def run_game():
     game_settings = Settings()
     screen = pygame.display.set_mode((game_settings.screen_width, game_settings.screen_height))
     pygame.display.set_caption("Пришельцы 2021")
+
+    # Создание корабля
+    ship = Ship(screen)
 
     # Запуск основного цикла игры
     while True:
@@ -20,6 +24,7 @@ def run_game():
 
         # При каждом проходе цикла перерисовывается экран
         screen.fill(game_settings.bg_color)
+        ship.blitme()
 
         # Отображение последнего прорисованного экрана
         pygame.display.flip()
