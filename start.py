@@ -12,7 +12,7 @@ def run_game():
     pygame.display.set_caption("Пришельцы 2021")
 
     # Создание корабля
-    ship = Ship(screen)
+    ship = Ship(game_settings, screen)
 
     # Запуск основного цикла игры
     while True:

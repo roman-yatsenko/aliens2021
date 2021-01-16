@@ -3,9 +3,10 @@ import pygame
 class Ship():
     """ Космический корабль игрока"""
 
-    def __init__(self, screen):
+    def __init__(self, game_settings, screen):
         """ Инициализирует корабль и задает его начальную позицию"""
         self.screen = screen
+        self.game_settings = game_settings
 
         # Загрузка изображения корабля и получение прямоугольника
         self.image = pygame.image.load('images/ship.bmp')
@@ -15,6 +16,9 @@ class Ship():
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
 
+        # Вещественная координата центра корабля
+        self.center = float(self.rect.centerx)
+
         # Флаги перемещения
         self.moving_right = False
         self.moving_left = False
@@ -22,9 +26,12 @@ class Ship():
     def update(self):
         """ Обновляет позицию корабля с учетом флага """
         if self.moving_right:
-            self.rect.centerx += 1
+            self.center += self.game_settings.ship_speed_factor
         if self.moving_left:
-            self.rect.centerx -= 1
+            self.center -= self.game_settings.ship_speed_factor
+        
+        # Обновление атрибута centerx
+        self.rect.centerx = self.center
 
     def blitme(self):
         """ рисует корабль в текущей позиции"""
