@@ -20,6 +20,7 @@ def run_game():
         gf.check_events(ship)
 
         # При каждом проходе цикла перерисовывается экран
+        ship.update()
         gf.update_screen(game_settings, screen, ship)
 
 run_game()
