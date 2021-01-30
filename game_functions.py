@@ -77,19 +77,26 @@ class AlienGame():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def get_number_aliens_x(self, alien_width):
+        """ Вычисляет количество пришельцев в ряду """
+        available_space_x = self.game_settings.screen_width - 2 * alien_width
+        number_aliens_x = int(available_space_x / (2 * alien_width))
+        return number_aliens_x
+
+    def create_alien(self, alien_number):
+        # Создание пришельца и размещение его в ряду
+        alien = Alien(self.game_settings, self.screen)
+        alien_width = alien.rect.width
+        alien.x = alien_width + 2 * alien_width * alien_number
+        alien.rect.x = alien.x
+        self.aliens.add(alien)
+
     def create_fleet(self):
         """ Создает флот пришельцев """
         # Вычисление количества пришельцев
         alien = Alien(self.game_settings, self.screen)
-        alien_width = alien.rect.width
-        available_space_x = self.game_settings.screen_width - 2 * alien_width
-        number_aliens_x = int(available_space_x / (2 * alien_width))
+        number_aliens_x = self.get_number_aliens_x(alien.rect.width)
 
         # Создание первого ряда пришельцев
         for alien_number in range(number_aliens_x):
-            # Создание пришельца и размещение его в ряду
-            alien = Alien(self.game_settings, self.screen)
-            alien.x = alien_width + 2 * alien_width * alien_number
-            alien.rect.x = alien.x
-            self.aliens.add(alien)
-            
+            self.create_alien(alien_number)            
