@@ -1,9 +1,7 @@
 import pygame
-from pygame.sprite import Group
 
 from settings import Settings
-from ship import Ship
-import game_functions as gf
+from game_functions import AlienGame
 
 def run_game():
     # Инициализирует игру и создает объект экрана
@@ -12,20 +10,18 @@ def run_game():
     screen = pygame.display.set_mode((game_settings.screen_width, game_settings.screen_height))
     pygame.display.set_caption("Пришельцы 2021")
 
-    # Создание корабля
-    ship = Ship(game_settings, screen)
-    # Создание группы для хранения пуль
-    bullets = Group()
+    # Создание главного объекта игры
+    main_game = AlienGame(screen, game_settings)
 
     # Запуск основного цикла игры
     while True:
         # Отслеживание событий клавиатуры и мыши
-        gf.check_events(game_settings, screen, ship, bullets)
+        main_game.check_events()
 
         # При каждом проходе цикла перерисовывается экран
-        ship.update()
-        gf.update_bullets(bullets)
+        main_game.ship.update()
+        main_game.update_bullets()
         
-        gf.update_screen(game_settings, screen, ship, bullets)
+        main_game.update_screen()
 
 run_game()
