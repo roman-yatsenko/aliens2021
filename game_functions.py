@@ -16,7 +16,9 @@ class AlienGame():
         # Создание корабля
         self.ship = Ship(game_settings, screen)
         # Создание пришельца
-        self.alien = Alien(game_settings, screen)
+        self.aliens = Group()
+        # Создание флота пришельцев
+        self.create_fleet()
         # Создание группы для хранения пуль
         self.bullets = Group()
 
@@ -61,7 +63,7 @@ class AlienGame():
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()            
-        self.alien.blitme()
+        self.aliens.draw(self.screen)
 
         # Отображение последнего прорисованного экрана
         pygame.display.flip()
@@ -74,3 +76,20 @@ class AlienGame():
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+    def create_fleet(self):
+        """ Создает флот пришельцев """
+        # Вычисление количества пришельцев
+        alien = Alien(self.game_settings, self.screen)
+        alien_width = alien.rect.width
+        available_space_x = self.game_settings.screen_width - 2 * alien_width
+        number_aliens_x = int(available_space_x / (2 * alien_width))
+
+        # Создание первого ряда пришельцев
+        for alien_number in range(number_aliens_x):
+            # Создание пришельца и размещение его в ряду
+            alien = Alien(self.game_settings, self.screen)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
+            
