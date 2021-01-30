@@ -25,6 +25,8 @@ class AlienGame():
             self.ship.moving_left = True
         elif event.key == pygame.K_SPACE:
             self.fire_bullet()
+        elif event.key == pygame.K_ESCAPE:
+            sys.exit()
 
     def fire_bullet(self):
         # Создание новой пули и включение в группу bullets
