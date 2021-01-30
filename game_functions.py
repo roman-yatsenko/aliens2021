@@ -5,6 +5,7 @@ from pygame.sprite import Group
 from bullet import Bullet
 
 from ship import Ship
+from alien import Alien
 
 class AlienGame():
 
@@ -14,6 +15,8 @@ class AlienGame():
         self.screen = screen
         # Создание корабля
         self.ship = Ship(game_settings, screen)
+        # Создание пришельца
+        self.alien = Alien(game_settings, screen)
         # Создание группы для хранения пуль
         self.bullets = Group()
 
@@ -58,6 +61,7 @@ class AlienGame():
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()            
+        self.alien.blitme()
 
         # Отображение последнего прорисованного экрана
         pygame.display.flip()
