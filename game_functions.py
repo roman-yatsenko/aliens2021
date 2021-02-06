@@ -1,4 +1,5 @@
 import sys
+from time import sleep
 
 import pygame
 from pygame.sprite import Group
@@ -132,7 +133,18 @@ class AlienGame():
 
         # Проверка коллизиц пришелец-корабль
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self.ship_hit()
+
+    def ship_hit(self):
+        """ Обрабатывает столкновение корабля с пришельцем"""
+        self.stats.ships_left -= 1
+        self.aliens.empty()
+        self.bullets.empty()
+        self.create_fleet()
+        self.ship.center_ship()
+
+        # Пауза
+        sleep(0.5)
 
     def check_fleet_edges(self):
         """ Реагирует на достижение флотом края экрана"""
