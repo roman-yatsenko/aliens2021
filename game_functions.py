@@ -76,6 +76,9 @@ class AlienGame():
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        
+        # Проверка попаданий в пришельцев
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
     def get_number_aliens_x(self, alien_width):
         """ Вычисляет количество пришельцев в ряду """
