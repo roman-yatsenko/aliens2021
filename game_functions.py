@@ -77,6 +77,9 @@ class AlienGame():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
         
+        self.check_bullet_alien_collisions()
+
+    def check_bullet_alien_collisions(self):    
         # Проверка попаданий в пришельцев
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
@@ -84,7 +87,7 @@ class AlienGame():
             # Уничтожение существующих пуль и создание нового флота
             self.bullets.empty()
             self.create_fleet()
-            
+
     def get_number_aliens_x(self, alien_width):
         """ Вычисляет количество пришельцев в ряду """
         available_space_x = self.game_settings.screen_width - 2 * alien_width
