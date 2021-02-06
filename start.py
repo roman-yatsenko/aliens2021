@@ -19,9 +19,11 @@ def run_game():
         main_game.check_events()
 
         # При каждом проходе цикла перерисовывается экран
-        main_game.ship.update()
-        main_game.update_bullets()
-        main_game.update_aliens()
+        if main_game.stats.game_active:
+            main_game.ship.update()
+            main_game.update_bullets()
+            main_game.update_aliens()
+        
         main_game.update_screen()
 
 run_game()

@@ -148,14 +148,16 @@ class AlienGame():
 
     def ship_hit(self):
         """ Обрабатывает столкновение корабля с пришельцем"""
-        self.stats.ships_left -= 1
-        self.aliens.empty()
-        self.bullets.empty()
-        self.create_fleet()
-        self.ship.center_ship()
-
-        # Пауза
-        sleep(0.5)
+        if self.stats.ships_left > 0:
+            self.stats.ships_left -= 1
+            self.aliens.empty()
+            self.bullets.empty()
+            self.create_fleet()
+            self.ship.center_ship()
+            # Пауза
+            sleep(0.5)
+        else:
+            self.stats.game_active = False        
 
     def check_fleet_edges(self):
         """ Реагирует на достижение флотом края экрана"""
