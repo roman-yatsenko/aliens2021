@@ -113,4 +113,18 @@ class AlienGame():
 
     def update_aliens(self):
         """ Обновление позиции всех пришельцев"""
+        self.check_fleet_edges()
         self.aliens.update()
+    
+    def check_fleet_edges(self):
+        """ Реагирует на достижение флотом края экрана"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self.change_fleet_direction()
+                break
+
+    def change_fleet_direction(self):
+        """ Изменяет направление флота"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.game_settings.fleet_drop_speed
+        self.game_settings.fleet_direction *= -1
