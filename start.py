@@ -21,7 +21,7 @@ def run_game():
         # При каждом проходе цикла перерисовывается экран
         main_game.ship.update()
         main_game.update_bullets()
-        
+        main_game.update_aliens()
         main_game.update_screen()
 
 run_game()

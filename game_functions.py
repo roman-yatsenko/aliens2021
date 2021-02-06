@@ -110,3 +110,7 @@ class AlienGame():
             # Создание ряда пришельцев
             for alien_number in range(number_aliens_x):
                 self.create_alien(alien_number, row_number)            
+
+    def update_aliens(self):
+        """ Обновление позиции всех пришельцев"""
+        self.aliens.update()

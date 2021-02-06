@@ -26,3 +26,8 @@ class Alien(Sprite):
         """ выводит пришельца на экран"""
         self.screen.blit(self.image, self.rect)
         
+    def update(self):
+        """ Перемещает пришельца вправо"""
+        self.x += self.game_settings.alien_speed_factor
+        self.rect.x = self.x
+        
