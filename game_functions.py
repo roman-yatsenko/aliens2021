@@ -6,6 +6,7 @@ from bullet import Bullet
 
 from ship import Ship
 from alien import Alien
+from game_stats import GameStats
 
 class AlienGame():
 
@@ -13,6 +14,8 @@ class AlienGame():
         """ Конструктор класса игры"""
         self.game_settings = game_settings
         self.screen = screen
+        # Создание объекта статистики игры
+        self.stats = GameStats(game_settings)
         # Создание корабля
         self.ship = Ship(game_settings, screen)
         # Создание пришельца
@@ -126,7 +129,11 @@ class AlienGame():
         """ Обновление позиции всех пришельцев"""
         self.check_fleet_edges()
         self.aliens.update()
-    
+
+        # Проверка коллизиц пришелец-корабль
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship hit!!!")
+
     def check_fleet_edges(self):
         """ Реагирует на достижение флотом края экрана"""
         for alien in self.aliens.sprites():
