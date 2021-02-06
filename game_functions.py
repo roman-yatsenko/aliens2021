@@ -131,9 +131,20 @@ class AlienGame():
         self.check_fleet_edges()
         self.aliens.update()
 
-        # Проверка коллизиц пришелец-корабль
+        # Проверка коллизий пришелец-корабль
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self.ship_hit()
+        
+        # Проверка достижения нижнего края пришельцами
+        self.check_aliens_bottom()
+
+    def check_aliens_bottom(self):
+        """ Проверяет, дорались ли пришельцы до нижнего края"""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                self.ship_hit()
+                break
 
     def ship_hit(self):
         """ Обрабатывает столкновение корабля с пришельцем"""
