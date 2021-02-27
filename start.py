@@ -12,7 +12,7 @@ def run_game():
 
     # Создание главного объекта игры
     main_game = AlienGame(screen, game_settings)
-
+    
     # Запуск основного цикла игры
     while True:
         # Отслеживание событий клавиатуры и мыши

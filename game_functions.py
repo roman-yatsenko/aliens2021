@@ -8,6 +8,7 @@ from bullet import Bullet
 from ship import Ship
 from alien import Alien
 from game_stats import GameStats
+from button import Button
 
 class AlienGame():
 
@@ -25,6 +26,8 @@ class AlienGame():
         self.create_fleet()
         # Создание группы для хранения пуль
         self.bullets = Group()
+        # Создание кнопки Play
+        self.play_button = Button(game_settings, screen, "Play")
 
     def check_keydown_events(self, event):
         """ Реагирует на нажатие клавиш"""
@@ -69,6 +72,10 @@ class AlienGame():
         self.ship.blitme()            
         self.aliens.draw(self.screen)
 
+        # Кнопка Play отображается, если игра неактивна
+        if not self.stats.game_active:
+            self.play_button.draw_button()
+            
         # Отображение последнего прорисованного экрана
         pygame.display.flip()
 
