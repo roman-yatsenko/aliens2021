@@ -119,6 +119,7 @@ class AlienGame():
         if len(self.aliens) == 0:
             # Уничтожение существующих пуль и создание нового флота
             self.bullets.empty()
+            self.game_settings.increase_speed()
             self.create_fleet()
 
     def get_number_aliens_x(self, alien_width):
