@@ -62,6 +62,14 @@ class AlienGame():
                 self.check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self.check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                self.check_play_button(mouse_x, mouse_y)
+
+    def check_play_button(self, mouse_x, mouse_y):
+        """ Запускает новую игру при нажатии кнопки Play """
+        if self.play_button.rect.collidepoint(mouse_x, mouse_y):
+            self.stats.game_active = True
 
     def update_screen(self):
         """ Обновляет изображение на экране """
@@ -75,7 +83,7 @@ class AlienGame():
         # Кнопка Play отображается, если игра неактивна
         if not self.stats.game_active:
             self.play_button.draw_button()
-            
+
         # Отображение последнего прорисованного экрана
         pygame.display.flip()
 
