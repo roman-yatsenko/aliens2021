@@ -80,6 +80,7 @@ class AlienGame():
 
             # Сброс игровой статистики
             self.stats.reset_stats()
+            self.sb.prep_score()
             self.stats.game_active = True
 
             # Очистка пришельцев и пуль
