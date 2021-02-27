@@ -9,6 +9,7 @@ from ship import Ship
 from alien import Alien
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard
 
 class AlienGame():
 
@@ -18,6 +19,7 @@ class AlienGame():
         self.screen = screen
         # Создание объекта статистики игры
         self.stats = GameStats(game_settings)
+        self.sb = Scoreboard(game_settings, screen, self.stats)
         # Создание корабля
         self.ship = Ship(game_settings, screen)
         # Создание пришельца
@@ -72,7 +74,7 @@ class AlienGame():
         if button_clicked and not self.stats.game_active:
             # Сброс игровых настроек
             self.game_settings.initialize_dynamic_settings()
-            
+
             # Скрываем указатель мыши
             pygame.mouse.set_visible(False)
 
@@ -96,6 +98,9 @@ class AlienGame():
             bullet.draw_bullet()
         self.ship.blitme()            
         self.aliens.draw(self.screen)
+
+        # Вывод счета
+        self.sb.show_score()
 
         # Кнопка Play отображается, если игра неактивна
         if not self.stats.game_active:
