@@ -1,10 +1,12 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship():
+class Ship(Sprite):
     """ Космический корабль игрока"""
 
     def __init__(self, game_settings, screen):
         """ Инициализирует корабль и задает его начальную позицию"""
+        super().__init__()
         self.screen = screen
         self.game_settings = game_settings
 
