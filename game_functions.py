@@ -68,7 +68,8 @@ class AlienGame():
 
     def check_play_button(self, mouse_x, mouse_y):
         """ Запускает новую игру при нажатии кнопки Play """
-        if self.play_button.rect.collidepoint(mouse_x, mouse_y):
+        button_clicked = self.play_button.rect.collidepoint(mouse_x, mouse_y)
+        if button_clicked and not self.stats.game_active:
             # Сброс игровой статистики
             self.stats.reset_stats()
             self.stats.game_active = True
