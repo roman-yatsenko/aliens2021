@@ -124,7 +124,8 @@ class AlienGame():
         # Проверка попаданий в пришельцев
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
         if collisions:
-            self.stats.score += self.game_settings.alien_points
+            for aliens in collisions.values():
+                self.stats.score += self.game_settings.alien_points * len(aliens)
             self.sb.prep_score()
 
         if len(self.aliens) == 0:
