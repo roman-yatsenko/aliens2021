@@ -128,6 +128,7 @@ class AlienGame():
             for aliens in collisions.values():
                 self.stats.score += self.game_settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.check_high_score()
 
         if len(self.aliens) == 0:
             # Уничтожение существующих пуль и создание нового флота
@@ -215,3 +216,9 @@ class AlienGame():
         for alien in self.aliens.sprites():
             alien.rect.y += self.game_settings.fleet_drop_speed
         self.game_settings.fleet_direction *= -1
+
+    def check_high_score(self):
+        """ Проверяет, появился ли новый рекорд """
+        if self.stats.score > self.stats.high_score:
+            self.stats.high_score = self.stats.score
+            self.sb.prep_high_score()
