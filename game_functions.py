@@ -70,6 +70,9 @@ class AlienGame():
         """ Запускает новую игру при нажатии кнопки Play """
         button_clicked = self.play_button.rect.collidepoint(mouse_x, mouse_y)
         if button_clicked and not self.stats.game_active:
+            # Сброс игровых настроек
+            self.game_settings.initialize_dynamic_settings()
+            
             # Скрываем указатель мыши
             pygame.mouse.set_visible(False)
 
