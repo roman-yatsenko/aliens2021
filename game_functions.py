@@ -70,6 +70,9 @@ class AlienGame():
         """ Запускает новую игру при нажатии кнопки Play """
         button_clicked = self.play_button.rect.collidepoint(mouse_x, mouse_y)
         if button_clicked and not self.stats.game_active:
+            # Скрываем указатель мыши
+            pygame.mouse.set_visible(False)
+
             # Сброс игровой статистики
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -183,7 +186,8 @@ class AlienGame():
             # Пауза
             sleep(0.5)
         else:
-            self.stats.game_active = False        
+            self.stats.game_active = False
+            pygame.mouse.set_visible(True)        
 
     def check_fleet_edges(self):
         """ Реагирует на достижение флотом края экрана"""
