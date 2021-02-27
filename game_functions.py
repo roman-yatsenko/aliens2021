@@ -69,7 +69,17 @@ class AlienGame():
     def check_play_button(self, mouse_x, mouse_y):
         """ Запускает новую игру при нажатии кнопки Play """
         if self.play_button.rect.collidepoint(mouse_x, mouse_y):
+            # Сброс игровой статистики
+            self.stats.reset_stats()
             self.stats.game_active = True
+
+            # Очистка пришельцев и пуль
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # Создание флота и корабля в центре
+            self.create_fleet()
+            self.ship.center_ship()
 
     def update_screen(self):
         """ Обновляет изображение на экране """
