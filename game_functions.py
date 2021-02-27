@@ -123,6 +123,9 @@ class AlienGame():
     def check_bullet_alien_collisions(self):    
         # Проверка попаданий в пришельцев
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if collisions:
+            self.stats.score += self.game_settings.alien_points
+            self.sb.prep_score()
 
         if len(self.aliens) == 0:
             # Уничтожение существующих пуль и создание нового флота
