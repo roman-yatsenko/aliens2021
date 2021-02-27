@@ -81,6 +81,8 @@ class AlienGame():
             # Сброс игровой статистики
             self.stats.reset_stats()
             self.sb.prep_score()
+            self.sb.prep_high_score()
+            self.sb.prep_level()
             self.stats.game_active = True
 
             # Очистка пришельцев и пуль
@@ -134,6 +136,9 @@ class AlienGame():
             # Уничтожение существующих пуль и создание нового флота
             self.bullets.empty()
             self.game_settings.increase_speed()
+            # Увеличение уровня
+            self.stats.level += 1
+            self.sb.prep_level()
             self.create_fleet()
 
     def get_number_aliens_x(self, alien_width):

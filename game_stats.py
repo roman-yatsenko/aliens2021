@@ -14,3 +14,4 @@ class GameStats():
         """ Инициализирует статистику для одной игры"""
         self.ships_left = self.game_settings.ship_limit
         self.score = 0
+        self.level = 1
